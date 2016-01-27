@@ -12,6 +12,8 @@ In your Quaint project directory, run the command:
 
 ## Sample usage
 
+Use the `youtube` macro with a video ID:
+
 ```quaint
 youtube :: dQw4w9WgXcQ
 
@@ -19,6 +21,9 @@ youtube :: dQw4w9WgXcQ @ 300x300
 
 @@youtube:dQw4w9WgXcQ
 ```
+
+You can find the video ID in the YouTube URL, it's after `v=` usually,
+and is strictly alphanumeric.
 
 
 ## Macro
