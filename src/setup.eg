@@ -1,0 +1,18 @@
+
+require:
+   inquirer-promise as inq
+   chalk
+
+
+async quaint-setup{config, instructions} =
+   url = "https://github.com/breuleux/quaint-youtube"
+   print 'Plugin documentation: {chalk.bold.cyan{url}}'
+
+   data = config.plugins["youtube"] or= {=}
+
+   ;; No configuration at this moment
+
+   ;; data.thing = await inq.input{"Something", {default = "whatever"}}
+
+
+provide = quaint-setup

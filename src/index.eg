@@ -1,0 +1,35 @@
+
+make-embed{id, options = {=}} =
+   url = 'http://www.youtube.com/embed/{id}'
+   iframe %
+      type = "text/html"
+      width = options.width
+      height = options.height
+      src = url
+      frameborder = 0
+
+make-embed2{id} =
+   {code, w, h} = match id:
+      R"^([^@]+) *@ *(\d+)x(\d+)$"! {_, code, w, h} ->
+         {code, w, h}
+      code ->
+         {code, 640, 390}
+   make-embed{code, {width = w, height = h}}
+
+install{@, options} =
+   @register-macros with {
+      youtube{engine, id} =
+         make-embed2{id.raw{}}
+   }
+   @register-rules with {
+      "@@ youtube : \\id"{engine, {=> id}} =
+         make-embed2{id.raw{}}
+   }
+
+main{*match} =
+   {@, options = {=}} when @is-quaint-engine ->
+      install{@, options}
+   {options = {=}} ->
+      {@} -> main{@, options}
+
+provide = main
